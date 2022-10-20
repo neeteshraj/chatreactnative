@@ -1,7 +1,5 @@
 import React, {FC} from 'react';
 import Root from './src/Root';
-import {Provider} from 'react-redux';
-import {store} from './src/redux/store/store';
 
 interface IProps {}
 
@@ -11,11 +9,7 @@ interface IProps {}
  **/
 
 const App: FC<IProps> = () => {
-  return (
-    <Provider store={store}>
-      <Root />
-    </Provider>
-  );
+  return <Root />;
 };
 
 export default App;
