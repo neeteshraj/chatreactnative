@@ -93,7 +93,7 @@ const Login: FC<IProps> = () => {
             <FormInput
               onChangeText={text => handleOnchange(text, 'email')}
               onFocus={() => handleError(null, 'email')}
-              iconName="email-outline"
+              iconName="email"
               label="Email"
               placeholder="Enter your email address"
               placeholderTextColor={COLORS.grey}
@@ -207,7 +207,6 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   loginButtonContainer: {
-    marginTop: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -1,7 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {FC} from 'react';
 import {View, TextInput, Text, StyleSheet} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Entypo from 'react-native-vector-icons/Entypo';
 import COLORS from '../../constants/colors/colors';
 
 interface IProps {
@@ -67,9 +68,9 @@ const FormInput: FC<IProps> = ({
           {...props}
         />
         {password && (
-          <Icon
+          <Entypo
             onPress={() => setHidePassword(!hidePassword)}
-            name={hidePassword ? 'eye-outline' : 'eye-off-outline'}
+            name={hidePassword ? 'eye' : 'eye-with-line'}
             style={passwordShowHideIconStyle}
           />
         )}
@@ -80,7 +81,7 @@ const FormInput: FC<IProps> = ({
 };
 
 const styles = StyleSheet.create({
-  container: {marginBottom: 10, height: 110},
+  container: {marginBottom: 5, height: 110},
   labels: {
     marginBottom: 5,
     fontSize: 14,

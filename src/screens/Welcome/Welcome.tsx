@@ -13,6 +13,8 @@ import BACKGROUND from '../../assets/images/chat-back.png';
 import WELCOMELOGO from '../../assets/logo/welcome-logo.png';
 import Button from '../../components/Button/Button';
 import {HEIGHT, WIDTH} from '../../utils/Dimensions';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../../navigation/Stack/StackNav';
 
 interface IProps {
   navigation: any;
@@ -23,16 +25,12 @@ interface IProps {
  * @function @Welcome
  **/
 
+type welcomeScreenProp = StackNavigationProp<RootStackParamList, 'Welcome'>;
+
 const Welcome: FC<IProps> = () => {
   const {container, logo, imageBackground, buttonsContainer, bgContainer} =
     styles;
-  const navigation = useNavigation();
-  const handleNavigation = () => {
-    navigation.navigate('Login');
-  };
-  const handleRegisterNavigation = () => {
-    navigation.navigate('Register', {});
-  };
+  const navigation = useNavigation<welcomeScreenProp>();
 
   return (
     <SafeAreaView style={container}>
@@ -41,8 +39,11 @@ const Welcome: FC<IProps> = () => {
           <Image source={WELCOMELOGO} style={logo} />
         </View>
         <View style={buttonsContainer}>
-          <Button text="Login" onPress={handleNavigation} />
-          <Button text="SignUp" onPress={handleRegisterNavigation} />
+          <Button text="Login" onPress={() => navigation.navigate('Login')} />
+          <Button
+            text="SignUp"
+            onPress={() => navigation.navigate('Register')}
+          />
         </View>
       </ImageBackground>
     </SafeAreaView>

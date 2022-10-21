@@ -4,7 +4,13 @@ import Welcome from '../../screens/Welcome/Welcome';
 import Login from '../../screens/Login/Login';
 import Register from '../../screens/Register/Register';
 
-const Stack = createStackNavigator();
+export type RootStackParamList = {
+  Welcome: undefined;
+  Login: undefined;
+  Register: undefined;
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 interface IProps {}
 
