@@ -6,6 +6,7 @@ interface IProps {
   text: string;
   onPress?: () => void;
   style?: any;
+  icon?: any;
 }
 
 /**
@@ -16,16 +17,14 @@ interface IProps {
 const Button: FC<IProps> = props => {
   return (
     <ButtonWrapper onPress={props.onPress} style={props.style}>
-      <ButtonText>{props.text}</ButtonText>
+      {props.text && <ButtonText>{props.text}</ButtonText>}
+      {props.icon && props.icon}
     </ButtonWrapper>
   );
 };
 
 const ButtonWrapper = styled.TouchableOpacity`
-  background-color: ${colors.buttonBackground};
   padding: 10px;
-  border-radius: 5px;
-  min-width: 150px;
   align-items: center;
   justify-content: center;
 `;

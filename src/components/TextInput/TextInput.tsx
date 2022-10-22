@@ -81,7 +81,7 @@ const FormInput: FC<IProps> = ({
 };
 
 const styles = StyleSheet.create({
-  container: {marginBottom: 5, height: 110},
+  container: {height: 105},
   labels: {
     marginBottom: 5,
     fontSize: 14,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   iconStyle: {color: COLORS.darkBlue, fontSize: 22, marginRight: 10},
   textInputStyle: {color: COLORS.darkBlue, flex: 1},
   passwordShowHideIconStyle: {color: COLORS.darkBlue, fontSize: 22},
-  errorText: {marginTop: 5, color: COLORS.red, fontSize: 12},
+  errorText: {marginTop: 5, color: COLORS.buttonBackground, fontSize: 12},
 });
 
 export default FormInput;

@@ -9,6 +9,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Text} from 'react-native-paper';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {useNavigation} from '@react-navigation/native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 //CUSTOM IMPORTS
 import BACKGROUND from '../../assets/images/chat-back.png';
@@ -17,6 +21,7 @@ import Button from '../../components/Button/Button';
 import FormInput from '../../components/TextInput/TextInput';
 import COLORS from '../../constants/colors/colors';
 import {HEIGHT, WIDTH} from '../../utils/Dimensions';
+import {RootStackParamList} from '../../navigation/Stack/StackNav';
 
 interface IProps {}
 
@@ -24,6 +29,8 @@ interface IProps {}
  * @author Nitesh Raj Khanal
  * @function @Login
  **/
+
+type loginScreenProp = StackNavigationProp<RootStackParamList, 'Welcome'>;
 
 const Login: FC<IProps> = () => {
   const {
@@ -39,16 +46,24 @@ const Login: FC<IProps> = () => {
     fieldContainer,
     dontHaveTextStyle,
     registerTextStyle,
+    forgotPasswordContainer,
+    forgotPasswordText,
     forgotPassword,
     buttonStyle,
     loginButtonContainer,
+    socialSignInContainer,
+    buttonPropsStyle,
+    signInButtons,
+    facebookStyle,
+    googleStyle,
+    twitterStyle,
   } = styles;
   const [inputs, setInputs] = useState({email: '', password: ''});
   const [errors, setErrors] = useState({
     email: '',
     password: '',
   });
-
+  const navigation = useNavigation<loginScreenProp>();
   const validate = async () => {
     Keyboard.dismiss();
     let isValid = true;
@@ -109,11 +124,14 @@ const Login: FC<IProps> = () => {
               error={errors.password}
               password
             />
+            <TouchableOpacity style={forgotPasswordContainer}>
+              <Text style={forgotPasswordText}>Forgot Password?</Text>
+            </TouchableOpacity>
             <View style={loginButtonContainer}>
               <Button
                 text="Log In"
                 onPress={validate}
-                style={{width: WIDTH * 0.45}}
+                style={buttonPropsStyle}
               />
             </View>
             <View style={forgotPassword}>
@@ -122,9 +140,48 @@ const Login: FC<IProps> = () => {
                 style={dontHaveTextStyle}>
                 Don't have account ?
               </Text>
-              <TouchableOpacity style={buttonStyle}>
+              <TouchableOpacity
+                style={buttonStyle}
+                onPress={() => navigation.navigate('Register')}>
                 <Text style={registerTextStyle}>Register</Text>
               </TouchableOpacity>
+            </View>
+            <View style={socialSignInContainer}>
+              <Text style={forgotPasswordText}>Or Sign in with</Text>
+              <View style={signInButtons}>
+                <Button
+                  text=""
+                  onPress={() => console.log('Facebook')}
+                  style={facebookStyle}
+                  icon={
+                    <MaterialIcons
+                      name="facebook"
+                      color={COLORS.white}
+                      size={20}
+                    />
+                  }
+                />
+                <Button
+                  text=""
+                  onPress={() => console.log('Google')}
+                  style={googleStyle}
+                  icon={
+                    <AntDesign
+                      name="googleplus"
+                      color={COLORS.white}
+                      size={20}
+                    />
+                  }
+                />
+                <Button
+                  text=""
+                  onPress={() => console.log('Twitter')}
+                  style={twitterStyle}
+                  icon={
+                    <AntDesign name="twitter" color={COLORS.white} size={20} />
+                  }
+                />
+              </View>
             </View>
           </View>
         </View>
@@ -150,7 +207,7 @@ const styles = StyleSheet.create({
     height: HEIGHT * 0.35,
   },
   logo: {
-    height: HEIGHT * 0.23,
+    height: HEIGHT * 0.15,
     aspectRatio: 1,
     resizeMode: 'contain',
   },
@@ -175,7 +232,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: COLORS.black,
     textAlign: 'center',
-    marginTop: 10,
     fontWeight: 'bold',
     letterSpacing: 0.5,
   },
@@ -186,19 +242,30 @@ const styles = StyleSheet.create({
   },
   fieldContainer: {marginVertical: 20},
   dontHaveTextStyle: {
-    marginTop: 20,
+    marginTop: 5,
     color: COLORS.grey,
     textAlign: 'center',
     fontSize: 12,
   },
   registerTextStyle: {
-    marginTop: 20,
+    marginTop: 5,
     color: COLORS.buttonBackground,
     textAlign: 'center',
     fontSize: 14,
     fontWeight: 'bold',
   },
+  forgotPasswordContainer: {
+    alignItems: 'flex-end',
+  },
+  forgotPasswordText: {
+    color: COLORS.buttonBackground,
+    textAlign: 'center',
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
   forgotPassword: {
+    marginTop: 10,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -209,6 +276,34 @@ const styles = StyleSheet.create({
   loginButtonContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  socialSignInContainer: {
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  buttonPropsStyle: {
+    width: WIDTH * 0.45,
+    borderRadius: 5,
+    backgroundColor: COLORS.buttonBackground,
+  },
+  signInButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  facebookStyle: {
+    backgroundColor: COLORS.facebookThemeColor,
+    width: WIDTH * 0.2,
+    borderRadius: 5,
+  },
+  googleStyle: {
+    backgroundColor: COLORS.googleThemeColor,
+    width: WIDTH * 0.2,
+    borderRadius: 5,
+  },
+  twitterStyle: {
+    backgroundColor: COLORS.twitterThemeColor,
+    width: WIDTH * 0.2,
+    borderRadius: 5,
   },
 });
 

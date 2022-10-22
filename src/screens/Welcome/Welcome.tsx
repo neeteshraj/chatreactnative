@@ -15,6 +15,7 @@ import Button from '../../components/Button/Button';
 import {HEIGHT, WIDTH} from '../../utils/Dimensions';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../navigation/Stack/StackNav';
+import colors from '../../constants/colors/colors';
 
 interface IProps {
   navigation: any;
@@ -28,8 +29,14 @@ interface IProps {
 type welcomeScreenProp = StackNavigationProp<RootStackParamList, 'Welcome'>;
 
 const Welcome: FC<IProps> = () => {
-  const {container, logo, imageBackground, buttonsContainer, bgContainer} =
-    styles;
+  const {
+    container,
+    logo,
+    imageBackground,
+    buttonsContainer,
+    bgContainer,
+    buttonPropsStyle,
+  } = styles;
   const navigation = useNavigation<welcomeScreenProp>();
 
   return (
@@ -39,10 +46,17 @@ const Welcome: FC<IProps> = () => {
           <Image source={WELCOMELOGO} style={logo} />
         </View>
         <View style={buttonsContainer}>
-          <Button text="Login" onPress={() => navigation.navigate('Login')} />
           <Button
+            text="Login"
+            style={buttonPropsStyle}
+            onPress={() => navigation.navigate('Login')}
+            icon=""
+          />
+          <Button
+            style={buttonPropsStyle}
             text="SignUp"
             onPress={() => navigation.navigate('Register')}
+            icon=""
           />
         </View>
       </ImageBackground>
@@ -76,6 +90,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     justifyContent: 'space-around',
     height: HEIGHT * 0.17,
+  },
+  buttonPropsStyle: {
+    width: WIDTH * 0.45,
+    borderRadius: 5,
+    backgroundColor: colors.buttonBackground,
   },
 });
 

@@ -7,6 +7,9 @@ const colors = {
   light: '#F3F4FB',
   darkBlue: '#7978B5',
   red: 'red',
+  facebookThemeColor: '#3b5998',
+  googleThemeColor: '#db3236',
+  twitterThemeColor: '#1da1f2',
 };
 
 export default colors;
