@@ -13,6 +13,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {useDispatch} from 'react-redux';
 
 //CUSTOM IMPORTS
 import BACKGROUND from '../../assets/images/chat-back.png';
@@ -22,6 +23,9 @@ import FormInput from '../../components/TextInput/TextInput';
 import COLORS from '../../constants/colors/colors';
 import {HEIGHT, WIDTH} from '../../utils/Dimensions';
 import {RootStackParamList} from '../../navigation/Stack/StackNav';
+import {loginApi} from '../../services/api/api';
+import {setToken} from '../../redux/features/authSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface IProps {}
 
@@ -58,7 +62,13 @@ const Login: FC<IProps> = () => {
     googleStyle,
     twitterStyle,
   } = styles;
-  const [inputs, setInputs] = useState({email: '', password: ''});
+
+  const dispatch = useDispatch();
+
+  const [inputs, setInputs] = useState({
+    email: '',
+    password: '',
+  });
   const [errors, setErrors] = useState({
     email: '',
     password: '',
@@ -79,9 +89,23 @@ const Login: FC<IProps> = () => {
       login();
     }
   };
+  const loginUser = () => {
+    loginApi(inputs.email, inputs.password)
+      .then(res => {
+        const tokenInfo = res.tokenData?.token;
+        dispatch(setToken(tokenInfo));
+        AsyncStorage.setItem('token', tokenInfo);
+        if (tokenInfo) {
+          navigation.navigate('Home');
+        }
+      })
+      .catch(err => {
+        console.log('Error =>', err);
+      });
+  };
 
   const login = () => {
-    console.log('Login success');
+    loginUser();
   };
 
   const handleOnchange = (text: any, input: any) => {
