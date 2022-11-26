@@ -7,7 +7,9 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "reversetcp":"adb reverse tcp:8081 tcp:8081",
+    "devices":"adb devices"
   },
   "resolutions": {
     "styled-components": "^5"
